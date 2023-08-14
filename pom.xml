@@ -21,6 +21,8 @@
         <assertj-core.version>3.19.0</assertj-core.version>
         <projectlombok.version>1.18.28</projectlombok.version>
         <wiremock-jre8.version>2.35.0</wiremock-jre8.version>
+        <awaitility.version>4.0.3</awaitility.version>
+
     </properties>
 
     <dependencies>
@@ -73,6 +75,13 @@
             <groupId>com.github.tomakehurst</groupId>
             <artifactId>wiremock-jre8-standalone</artifactId>
             <version>${wiremock-jre8.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--  AWAITILITY -->
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
