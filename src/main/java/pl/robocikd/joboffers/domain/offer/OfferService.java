@@ -13,20 +13,12 @@ class OfferService {
 
     List<Offer> fetchAllOffersAndSaveAllIfNotExists() {
         List<Offer> jobOffers = fetchOffers();
-//        final List<Offer> offers = filterNotExistingOffers(jobOffers);
+        final List<Offer> offers = filterNotExistingOffers(jobOffers);
         try {
-            return jobOffers;
-//            return offerRepository.saveAll(offers);
+            return offerRepository.saveAll(offers);
         } catch (OfferDuplicateException duplicateKeyException) {
             throw new OfferSavingException(duplicateKeyException.getMessage(), jobOffers);
         }
-    }
-
-    private List<Offer> filterNotExistingOffers(List<Offer> jobOffers) {
-        return jobOffers.stream()
-                .filter(offerDto -> !offerDto.offerUrl().isEmpty())
-                .filter(offerDto -> !offerRepository.existsByOfferUrl(offerDto.offerUrl()))
-                .collect(Collectors.toList());
     }
 
     private List<Offer> fetchOffers() {
@@ -34,5 +26,12 @@ class OfferService {
                 .stream()
                 .map(OfferMapper::mapFromJobOfferResponseToOffer)
                 .toList();
+    }
+
+    private List<Offer> filterNotExistingOffers(List<Offer> jobOffers) {
+        return jobOffers.stream()
+                .filter(offerDto -> !offerDto.offerUrl().isEmpty())
+                .filter(offerDto -> !offerRepository.existsByOfferUrl(offerDto.offerUrl()))
+                .collect(Collectors.toList());
     }
 }
