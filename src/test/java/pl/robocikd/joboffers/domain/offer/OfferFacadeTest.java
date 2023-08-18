@@ -2,6 +2,7 @@ package pl.robocikd.joboffers.domain.offer;
 
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.Test;
+import org.springframework.dao.DuplicateKeyException;
 import pl.robocikd.joboffers.domain.offer.dto.JobOfferResponse;
 import pl.robocikd.joboffers.domain.offer.dto.OfferRequestDto;
 import pl.robocikd.joboffers.domain.offer.dto.OfferResponseDto;
@@ -10,7 +11,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.ThrowableAssert.catchThrowable;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class OfferFacadeTest {
 
@@ -109,7 +109,7 @@ public class OfferFacadeTest {
                 new OfferRequestDto("cx", "vc", "xcv", "hello.pl")));
         // then
         AssertionsForClassTypes.assertThat(thrown)
-                .isInstanceOf(OfferDuplicateException.class)
+                .isInstanceOf(DuplicateKeyException.class)
                 .hasMessage("Offer with offerUrl [hello.pl] already exists");
     }
 }
