@@ -1,4 +1,4 @@
-package pl.robocikd.joboffers.domain.login.dto;
+package pl.robocikd.joboffers.domain.loginandregister.dto;
 
 import lombok.Builder;
 
