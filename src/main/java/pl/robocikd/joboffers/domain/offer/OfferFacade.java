@@ -1,6 +1,7 @@
 package pl.robocikd.joboffers.domain.offer;
 
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import pl.robocikd.joboffers.domain.offer.dto.OfferRequestDto;
 import pl.robocikd.joboffers.domain.offer.dto.OfferResponseDto;
 
@@ -13,6 +14,7 @@ public class OfferFacade {
     private final OfferRepository offerRepository;
     private final OfferService offerService;
 
+    @Cacheable(cacheNames = "jobOffers")
     public List<OfferResponseDto> findAllOffers() {
         return offerRepository.findAll()
                 .stream()
